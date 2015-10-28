@@ -10,8 +10,8 @@ public class Auto {
     private String pTyp="^(Klein.*|Komb.*|Lim.*|Van( )?\\/( )?Mini.*|Sport.*( )?\\/( )? Cou.*|Cab.*( )?\\/( )?Road.*)$";
     private String pGetriebe="^(Automatik.*|Schalt.*)$";
     private String pHU="HU( )?(0[0-9]|1[0-2])( )?\\/( )?[0-9]{4}|HU( )?(NEU)";
-    private String pLeistung="[0-9]{2,}( )?[kKwW]{2}( )?\\([0-9]{2,}( )?[PpSs]{2}\\)";
-    private String pKraftstoff="([dD]iesel|[Bb]enzin|([Aa]uto|[Ee]rd)gas|[Hh]ybrid)";
+    private String pLeistung= "[0-9]{2,}( )?[kKwW]{2}( )?\\([0-9]{2,}( )?[PpSs]{2}\\).*";
+    private String pKraftstoff=".*([dD]iesel|[Bb]enzin|[Aa]uto.*|[Ee]rd.*|[Hh]ybr.*)";
     private String pPlz="DE\\s?-\\s?\\d{5}\\s?[A-Z]?[-a-zA-Z äöüßÄÖÜ.()]*";
     private String pKm="\\d{3}\\.?\\d{3}( )?[kK][mM]";
     private String pEz="EZ\\s?[01]\\d\\/[12]\\d{3}";
@@ -112,7 +112,7 @@ public class Auto {
     @Override
     public String toString() {
         return "Auto{" +
-                "titel='" + titel + '\'' +
+                "titel='" + titel + '\'' + "\n"+
                 ", plz='" + plz + '\'' +
                 ", typ='" + typ + '\'' +
                 ", getriebe='" + getriebe + '\'' +

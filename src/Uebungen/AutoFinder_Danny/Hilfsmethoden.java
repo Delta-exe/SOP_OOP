@@ -16,6 +16,7 @@ public class Hilfsmethoden {
 
         try (BufferedReader br = new BufferedReader(new FileReader(datei))) {
             String zeile = null;
+            String puffer = null;
             String temp = "Start";
             ArrayList<Auto> autoListe = new ArrayList<>();
             Auto a = new Auto();
@@ -43,13 +44,17 @@ public class Hilfsmethoden {
                         break;
                     }
                     if (zeile.matches(a.getpLeistung())) {
-                        a.setLeistung(zeile);
+                        if (zeile.contains(",")) {
+                            a.setLeistung(zeile.substring(0, zeile.indexOf(",")));
+                            a.setKraftstoff(zeile.substring(zeile.indexOf(",") + 2, zeile.length()));
+                        } else
+                            a.setLeistung(zeile);
                         break;
                     }
-                    if (zeile.matches(a.getpKraftstoff())) {
+              /*      if (zeile.matches(a.getpKraftstoff())) {
                         a.setKraftstoff(zeile);
                         break;
-                    }
+                    }*/
 
                     if (zeile.matches(a.getpKosten())) {
                         a.setKosten(zeile);
