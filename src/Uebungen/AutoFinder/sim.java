@@ -1,11 +1,8 @@
-package Uebungen.AutoFinder_Danny;
+package Uebungen.AutoFinder;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by dbernhardt on 20.10.2015.
- */
 public class sim {
     public static void main(String[] args) {
         Hilfsmethoden hm = new Hilfsmethoden();
@@ -26,6 +23,9 @@ public class sim {
 
 
         System.out.println(zahl + " Dateien eingelesen");
+        System.out.println("Größe der Liste: " + al.size());
+
+
         zahl = 0;
         for (Auto a: al){
             zahl++;
@@ -35,7 +35,7 @@ public class sim {
 
 
 
-       //System.out.println("Größe der Liste: " + al.size());
+
 
 
 

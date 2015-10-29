@@ -1,15 +1,13 @@
-package Uebungen.AutoFinder_Danny;
+package Uebungen.AutoFinder;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Auto {
-    private String pTitel=""; // der erste Eintrag ist immer der Titel
     private String pTyp="^(Klein.*|Komb.*|Lim.*|Van( )?\\/( )?Mini.*|Sport.*( )?\\/( )? Cou.*|Cab.*( )?\\/( )?Road.*)$";
     private String pGetriebe="^(Automatik.*|Schalt.*)$";
     private String pHU="HU( )?(0[0-9]|1[0-2])( )?\\/( )?[0-9]{4}|HU( )?.*";
     private String pLeistung= "[0-9]{2,}( )?[kKwW]{2}( )?\\([0-9]{2,}( )?[PpSs]{2}\\).*";
-    private String pKraftstoff=".*([dD]iesel|[Bb]enzin|[Aa]uto.*|[Ee]rd.*|[Hh]ybr.*)";
     private String pPlz="DE\\s?-\\s?\\d{5}\\s?[A-Z]?[-a-zA-Z äöüßÄÖÜ.()]*";
     private String pKm="^[0-9]{0,3}\\.?[0-9]{1,3}( )?[KkMm]{2}\\s*";
     private String pEz="EZ\\s?[01]\\d\\/[12]\\d{3}";
@@ -20,9 +18,7 @@ public class Auto {
     private String typ = "Keine Angabe";
     private String getriebe = "Keine Angabe";
     private String hu = "Keine Angabe";
-    private String leistung = "Keine Angabe";
     private String kraftstoff = "Keine Angabe";
-    private String ez="Keine Angabe";
     private int ezMo;
     private int ezJa;
     private String kosten="Keine Angabe";
@@ -51,10 +47,6 @@ public class Auto {
         return pLeistung;
     }
 
-    public String getpKraftstoff() {
-        return pKraftstoff;
-    }
-
     public String getpPlz() {
         return pPlz;
     }
@@ -69,10 +61,6 @@ public class Auto {
 
     public String getpKosten() {
         return pKosten;
-    }
-
-    public List<String> getExtras(){
-        return extras;
     }
 
     public void setTitel(String titel) {
@@ -132,7 +120,7 @@ public class Auto {
 
     public void setEz(String ez) {
         //EZ /1992
-        ez = ez.replace("/"," ");
+        ez = ez.replace("/", " ");
         puffer = ez.split(" ");
         ezMo = Integer.parseInt(puffer[1]);
         ezJa = Integer.parseInt(puffer[2]);

@@ -1,4 +1,4 @@
-package Uebungen.AutoFinder_Danny;
+package Uebungen.AutoFinder;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
