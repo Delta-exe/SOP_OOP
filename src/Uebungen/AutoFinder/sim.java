@@ -1,7 +1,6 @@
 package Uebungen.AutoFinder;
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class sim {
     public static void main(String[] args) {
@@ -27,11 +26,22 @@ public class sim {
 
 
         zahl = 0;
+
+        Set<Auto> s = new HashSet<>();
+        s.addAll(al);
+        al.clear();
+        al.addAll(s);
+
+        Collections.sort(al);
+
+
+
+
         for (Auto a: al){
             zahl++;
-            System.out.println("\n-----------------------------\n\n" +"Nr. " + zahl + "\n" + a.toString());
-        }
 
+            System.out.println("\n-----------------------------\n\n" + "Nr. " + zahl + "\n" + a.toString());
+        }
 
 
 

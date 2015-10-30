@@ -3,7 +3,7 @@ package Uebungen.AutoFinder;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Auto {
+public class Auto implements Comparable<Auto> { //
     private String pTyp="^(Klein.*|Komb.*|Lim.*|Van( )?\\/( )?Mini.*|Sport.*( )?\\/( )? Cou.*|Cab.*( )?\\/( )?Road.*)$";
     private String pGetriebe="^(Automatik.*|Schalt.*)$";
     private String pHU="HU( )?(0[0-9]|1[0-2])( )?\\/( )?[0-9]{4}|HU( )?.*";
@@ -21,7 +21,7 @@ public class Auto {
     private String kraftstoff = "Keine Angabe";
     private int ezMo;
     private int ezJa;
-    private String kosten="Keine Angabe";
+
     private int kilom = 0;
     private int plzNeu = 0;
     private String land = "Keine Angabe";
@@ -29,6 +29,7 @@ public class Auto {
     private int ps;
     private String [] puffer;
     private List<String> extras = new ArrayList<>();
+    int preis;
 
 
     public String getpTyp() {
@@ -62,6 +63,8 @@ public class Auto {
     public String getpKosten() {
         return pKosten;
     }
+
+    public int getPlzNeu(){return plzNeu;}
 
     public void setTitel(String titel) {
         this.titel = titel;
@@ -107,7 +110,7 @@ public class Auto {
         //17.000 km
         /*this.km = km;*/
         km = km.replace("\t", "");
-        km = km.substring(0,km.length()-3);  //17.000
+        km = km.substring(0, km.length() - 3);  //17.000
 
 
         if(km.contains(".")){
@@ -130,7 +133,18 @@ public class Auto {
     }
 
     public void setKosten(String kosten) {
-        this.kosten = kosten;
+
+        kosten = kosten.replace("\t", "");
+        kosten = kosten.substring(0, kosten.length() - 2);
+
+
+        if(kosten.contains(".")){
+            kosten = kosten.replace(".","");
+            this.preis = Integer.parseInt(kosten);
+        } else
+            this.preis = Integer.parseInt(kosten);
+
+
     }
 
     public void setExtras(String s) {
@@ -150,8 +164,71 @@ public class Auto {
                 "Kraftstoff = " + kraftstoff + "\n" +
                 "Km-Stand = " + kilom + " km" + "\n" +
                 "EZ = " + ezMo + " / " + ezJa + "\n" +
-                "Preis = " + kosten + "\n"+
+                "Preis = " + preis + " € " + "\n"+
                 "Extras = " + extras.toString();
 
+    }
+
+
+    public int compareTo(Auto o) {
+        int ret = this.titel.compareTo(o.titel);
+        if (ret == 0) {
+            ret = this.kilom- o.kilom;
+            if (ret == 0) {
+                ret = this.ezJa - o.ezJa;
+                if(ret== 0)
+                    ret = this.ezMo - o.ezMo;
+                if (ret == 0)
+                    ret = this.preis - o.preis;
+            }
+        }
+
+
+        return ret;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Auto)) return false;
+
+        Auto auto = (Auto) o;
+
+        if (ezMo != auto.ezMo) return false;
+        if (ezJa != auto.ezJa) return false;
+        if (kilom != auto.kilom) return false;
+        if (getPlzNeu() != auto.getPlzNeu()) return false;
+        if (kw != auto.kw) return false;
+        if (ps != auto.ps) return false;
+        if (preis != auto.preis) return false;
+        if (titel != null ? !titel.equals(auto.titel) : auto.titel != null) return false;
+        if (ort != null ? !ort.equals(auto.ort) : auto.ort != null) return false;
+        if (typ != null ? !typ.equals(auto.typ) : auto.typ != null) return false;
+        if (getriebe != null ? !getriebe.equals(auto.getriebe) : auto.getriebe != null) return false;
+        if (hu != null ? !hu.equals(auto.hu) : auto.hu != null) return false;
+        if (kraftstoff != null ? !kraftstoff.equals(auto.kraftstoff) : auto.kraftstoff != null) return false;
+        if (land != null ? !land.equals(auto.land) : auto.land != null) return false;
+        return !(extras != null ? !extras.equals(auto.extras) : auto.extras != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = titel != null ? titel.hashCode() : 0;
+        result = 31 * result + (ort != null ? ort.hashCode() : 0);
+        result = 31 * result + (typ != null ? typ.hashCode() : 0);
+        result = 31 * result + (getriebe != null ? getriebe.hashCode() : 0);
+        result = 31 * result + (hu != null ? hu.hashCode() : 0);
+        result = 31 * result + (kraftstoff != null ? kraftstoff.hashCode() : 0);
+        result = 31 * result + ezMo;
+        result = 31 * result + ezJa;
+        result = 31 * result + kilom;
+        result = 31 * result + getPlzNeu();
+        result = 31 * result + (land != null ? land.hashCode() : 0);
+        result = 31 * result + kw;
+        result = 31 * result + ps;
+        result = 31 * result + (extras != null ? extras.hashCode() : 0);
+        result = 31 * result + preis;
+        return result;
     }
 }
