@@ -1,4 +1,4 @@
-package Uebungen.AutoFinder;
+package Hausaufgaben.HA20151113;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +29,7 @@ public class Auto implements Comparable<Auto> { //
     private int ps;
     private String [] puffer;
     private List<String> extras = new ArrayList<>();
-    int preis;
+    int preis = -1;
 
 
     public String getpTyp() {
@@ -65,6 +65,17 @@ public class Auto implements Comparable<Auto> { //
     }
 
     public int getPlzNeu(){return plzNeu;}
+
+    public String getTitel() {return titel;}
+
+    public String getOrt() {return ort;}
+
+    public int getKosten() {return preis;}
+
+    public int getPlz(){return plzNeu;}
+
+
+    /// ###################### START SETTER ##############################
 
     public void setTitel(String titel) {
         this.titel = titel;
